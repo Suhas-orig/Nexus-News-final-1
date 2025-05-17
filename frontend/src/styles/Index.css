@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@keyframes spin-slower {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-slower {
+  animation: spin-slower 2s linear infinite;
+}
+
+
+body {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Masonry grid styles */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -8px; /* reduced the gutter size offset */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 8px; /* reduced padding */
+  background-clip: padding-box;
+}
+
+/* Optional: Different breakpoints */
+@media (min-width: 640px) {
+  .my-masonry-grid {
+    margin-left: -12px; /* smaller offset */
+  }
+  .my-masonry-grid_column {
+    padding-left: 12px; /* smaller padding */
+  }
+}
+
+@media (min-width: 768px) {
+  .my-masonry-grid {
+    margin-left: -16px; /* tighter margin for medium screens */
+  }
+  .my-masonry-grid_column {
+    padding-left: 16px; /* tighter padding */
+  }
+}
+
+.news-card {
+  width: 100%;
+  break-inside: avoid; /* Prevent card splitting between columns */
+  margin-bottom: 16px; /* reduced bottom margin for tighter layout */
+}
