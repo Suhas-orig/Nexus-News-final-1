@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NewsCard from "../components/NewsCard";
 import Masonry from "react-masonry-css";
+import VintageLoader from "../components/VintageLoader"; 
 import "../styles/Index.css";
 
 function News2() {
@@ -40,7 +41,7 @@ function News2() {
                 setLoading(false);
             });
     }, []);
-
+    if (loading) return <VintageLoader />;
     return (
         <div className="min-h-screen bg-[url('/vintage_newspaper_bg.jpg')] bg-cover bg-fixed bg-no-repeat px-4 py-10 font-special">
             <div className="w-full px-6 xl:px-12">

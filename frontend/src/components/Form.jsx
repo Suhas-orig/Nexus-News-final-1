@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import LoadingIndicator from "./LoadingIndicator.jsx";
-import AuthHeader from "../components/AuthHeader.jsx"; // Import the new header
+import AuthHeader from "../components/AuthHeader.jsx";
+import SimpleLoader from "./SimpleLoader.jsx";
 
 function Form({ route, method }) {
   const [username, setUsername] = useState("");
@@ -26,61 +26,68 @@ function Form({ route, method }) {
         navigate("/login");
       }
     } catch (error) {
-      alert(error);
+      alert("Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  if (loading) return <SimpleLoader />;
+
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 relative bg-transparent">
-      {/* Use the new header */}
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 ">
       <AuthHeader />
 
-      {/* Main Form wrapped on torn-paper image */}
       <form
         onSubmit={handleSubmit}
-        className="relative bg-[url('/torn-paper-removebg-preview.png')] bg-cover bg-center bg-no-repeat
-                  w-full sm:w-[380px] h-[400px] sm:h-[550px] 
-                  p-6 sm:p-8 rounded-xl shadow-md flex flex-col items-center justify-center
-                   text-[#3a3835]  z-10"
-      >
-        <h1 className="text-3xl font-bold mb-4 text-center text-[#42403a] uppercase">{name}</h1>
+        className="w-full sm:w-[380px] mt-6 p-6 sm:p-8 rounded-2xl border border-[#a0522d] bg-[#faf8f7] 
+        shadow-[4px_4px_8px_rgba(168,83,63,0.4)] 
+        hover:shadow-[6px_6px_12px_rgba(160,70,55,0.6)] 
+        transition-shadow duration-300 font-['Special_Elite']
+         text-[#2b2b2b] z-10 relative overflow-hidden"
 
+      >
+        <h1 className="text-3xl font-bold mb-6 text-center uppercase tracking-wider">
+          {name}
+        </h1>
+
+        <label className="block text-sm mb-1">Username</label>
         <input
-          className="w-full px-4 py-2 mb-4 bg-[#f5f2e8]/10 text-[#42423d] rounded-sm border border-[#a58b58]/30 
-                    focus:outline-none focus:ring-1 focus:ring-[#a58b58] 
-                    placeholder-[#413c3c] transition duration-200 shadow-sm"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
+          placeholder="Your Codename..."
           required
+          className="w-full px-4 py-2 mb-4 bg-[#f5f2e8]/30 text-[#2b2b2b] border border-[#a58b58]/30 
+                     focus:outline-none focus:ring-1 focus:ring-[#a58b58] rounded-sm shadow-sm placeholder-[#5a544d]"
         />
 
+        <label className="block text-sm mb-1">Password</label>
         <input
-          className="w-full px-4 py-2 mb-4 bg-[#f5f2e8]/10 text-[#3b3a37] rounded-sm border border-[#a58b58]/30 
-                    focus:outline-none focus:ring-1 focus:ring-[#a58b58] 
-                    placeholder-[#3b3636] transition duration-200 shadow-sm"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Your Secret Pass..."
           required
+          className="w-full px-4 py-2 mb-6 bg-[#f5f2e8]/30 text-[#2b2b2b] border border-[#a58b58]/30 
+                     focus:outline-none focus:ring-1 focus:ring-[#a58b58] rounded-sm shadow-sm placeholder-[#5a544d]"
         />
 
-        {loading && <LoadingIndicator />}
+          <button
+            type="submit"
+            className="group relative inline-block w-full overflow-hidden border border-[#b83a3a] px-8 py-3 focus:ring-2 focus:outline-none"
+          >
+            <span
+              className="absolute inset-x-0 top-0 h-[2px] bg-[#b83a3a] transition-all duration-300 group-hover:h-full"
+            ></span>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="relative w-full px-6 py-2 mb-2 text-[#3b3a38] text-sm uppercase tracking-widest font-semibold 
-                    bg-[#f5f2e8]/10 border border-[#a58b58]/30 
-                    hover:bg-[#f5f2e8]/20 hover:border-[#a58b58] hover:text-[#0f0f0f]
-                    transition duration-200 ease-in-out rounded-sm shadow-sm"
-        >
-          {name}
-        </button>
+            <span
+              className="relative text-sm font-semibold text-[#b83a3a] transition-colors duration-300 group-hover:text-white font-['Special_Elite'] tracking-wider uppercase"
+            >
+              {name}
+            </span>
+          </button>
+
 
       </form>
     </div>

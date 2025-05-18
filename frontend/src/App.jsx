@@ -5,6 +5,8 @@ import Register from "./pages/Register";
 import SavedArticles from "./pages/SavedArticles"; // Note app
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Discussion from "./pages/Discussion"; // 👈 Import this!
+
 import News from "./pages/News";
 import News2 from "./pages/News2";
 import News3 from "./pages/News3";  // <-- Import your new News3 component
@@ -39,7 +41,6 @@ function App() {
       <div className="relative min-h-screen">
         <BrowserRouter>
           <Routes>
-            {/* Existing routes */}
             <Route
               path="/"
               element={
@@ -55,7 +56,7 @@ function App() {
               element={
                 <ProtectedRoute>
                   <DashboardLayout>
-                  <SavedArticles />
+                    <SavedArticles />
                   </DashboardLayout>
                 </ProtectedRoute>
               }
@@ -70,7 +71,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* NEW Hindu news route */}
             <Route
               path="/hindu-news"
               element={
@@ -81,12 +81,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            
+            {/* 🚀 New Discussion Route */}
+            <Route
+              path="/discussion"
+              element={
+                <ProtectedRoute>
+                  <Discussion />
+                </ProtectedRoute>
+              }
+            />
 
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<RegisterAndLogout />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+
         </BrowserRouter>
       </div>
     </div>

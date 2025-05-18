@@ -1,11 +1,24 @@
 import { useState, useEffect } from "react";
+import Masonry from "react-masonry-css";
 import api from "../api";
-import SavedArticleCard from "../components/SavedArticleCard";  // Import the new card here
+import { useNavigate } from "react-router-dom";
+import SavedArticleCard from "../components/SavedArticleCard";
+import VintageLoader from "../components/VintageLoader";
 import "../styles/Index.css";
 
 function SavedArticles() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();  // <--- add this
+
+  const breakpointColumnsObj = {
+    default: 4,
+    1536: 4,
+    1280: 4,
+    1024: 3,
+    640: 2,
+    0: 1,
+  };
 
   useEffect(() => {
     fetchSavedArticles();
@@ -25,7 +38,7 @@ function SavedArticles() {
   };
 
   const deleteArticle = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this article? 🗑️")) return;
+    if (!window.confirm("Are you sure you want to delete this article? ")) return;
     try {
       const res = await api.delete(`savednews/api/saved/${id}/`);
       if (res.status === 204) {
@@ -40,25 +53,40 @@ function SavedArticles() {
     }
   };
 
-  return (
-    <div className="min-h-screen flex justify-center items-center px-4 relative bg-transparent">
-      <div className="max-w-3xl mx-auto z-10">
-        <h2 className="text-3xl font-bold mb-8 text-[#3a3835]">📚 Your Saved Articles</h2>
+  // NEW: Navigate to discussion page, passing article as state
+  const handleDiscuss = (article) => {
+    navigate("/discussion", { state: { article } });
+  };
 
-        {loading ? (
-          <p className="text-[#3a3835] text-sm">Loading saved articles...</p>
-        ) : articles.length > 0 ? (
-          <div className="grid md:grid-cols-2 gap-6">
+  if (loading) return <VintageLoader />;
+
+  return (
+    <div className="min-h-screen flex justify-center items-start px-6 relative bg-transparent pt-12">
+      <div className="max-w-[1700px] mx-auto z-10">
+        <h2 className="text-3xl font-bold mb-9 font-['Special_Elite'] text-[#3a3835]">
+          Your Saved Articles
+        </h2>
+
+        {articles.length > 0 ? (
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
             {articles.map((article) => (
-              <SavedArticleCard
-                key={article.id}
-                article={article}
-                onDelete={deleteArticle}
-              />
+              <div key={article.id} className="mb-6">
+                <SavedArticleCard
+                  article={article}
+                  onDelete={deleteArticle}
+                  onDiscuss={handleDiscuss}  
+                />
+              </div>
             ))}
-          </div>
+          </Masonry>
         ) : (
-          <p className="text-[#3a3835] text-sm italic">No saved articles yet! Start saving some 📰✨</p>
+          <p className="text-[#3a3835] text-sm italic">
+            No saved articles yet! Start saving some 📰✨
+          </p>
         )}
       </div>
     </div>

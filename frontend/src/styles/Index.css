@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 @import "tailwindcss";
 
 @keyframes spin-slower {
@@ -12,7 +13,6 @@
 .animate-spin-slower {
   animation: spin-slower 2s linear infinite;
 }
-
 
 body {
   font-family: 'Playfair Display', serif;
@@ -53,4 +53,15 @@ body {
   width: 100%;
   break-inside: avoid; /* Prevent card splitting between columns */
   margin-bottom: 16px; /* reduced bottom margin for tighter layout */
+}
+
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
 }

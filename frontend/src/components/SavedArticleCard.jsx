@@ -1,6 +1,6 @@
 import { BookMarked, ExternalLink, Trash2 } from "lucide-react";
 
-export default function SavedArticleCard({ article, onDelete }) {
+export default function SavedArticleCard({ article, onDelete, onDiscuss }) {
   const formattedDate = new Date(article.saved_at).toLocaleDateString("en-US");
 
   return (
@@ -20,12 +20,22 @@ export default function SavedArticleCard({ article, onDelete }) {
       <p className="text-xs italic text-[#6c5b4c] mt-2">Source: {article.source}</p>
       <p className="text-xs italic text-[#6c5b4c] mt-1">Saved on: {formattedDate}</p>
 
-      <button
-        onClick={() => onDelete(article.id)}
-        className="mt-4 inline-flex items-center gap-1 text-xs text-white bg-[#b83a3a] hover:bg-[#922727] px-4 py-2 rounded-md shadow transition-colors"
-      >
-        <Trash2 className="w-4 h-4" /> Delete
-      </button>
+      <div className="mt-4 flex gap-3">
+        <button
+          onClick={() => onDelete(article.id)}
+          className="inline-flex items-center gap-1 text-xs text-white bg-[#b83a3a] hover:bg-[#922727] px-4 py-2 rounded-md shadow transition-colors"
+        >
+          <Trash2 className="w-4 h-4" /> Delete
+        </button>
+
+        {/* NEW BUTTON */}
+        <button
+          onClick={() => onDiscuss(article)}
+          className="inline-flex items-center gap-1 text-xs text-white bg-[#6b705c] hover:bg-[#535843] px-4 py-2 rounded-md shadow transition-colors"
+        >
+          📝 Note & Discuss
+        </button>
+      </div>
     </div>
   );
 }
