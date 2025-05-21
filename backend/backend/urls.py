@@ -31,5 +31,6 @@ urlpatterns = [
     path('scraper2/', include('scraper2.urls')),
     path('scraper3/', include('scraper3.urls')),
     path("savednews/", include("savednews.urls")),
+    path('threads/', include('threads.urls')),
 
 ]

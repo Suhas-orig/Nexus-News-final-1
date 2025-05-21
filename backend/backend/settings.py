@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "scraper2",
     "scraper3",
     "savednews",
+    "threads",
     "rest_framework",
     "corsheaders",
 ]

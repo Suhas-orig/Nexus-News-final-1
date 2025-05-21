@@ -1,6 +1,13 @@
-//src/components/SaveButton.jsx
+// src/components/SaveButton.jsx
 import { useState } from "react";
 import api from "../api";
+
+const getSourceFromLink = (link) => {
+  if (!link) return "Unknown Source";
+  if (link.includes("timesofindia")) return "Times of India";
+  if (link.includes("ndtv")) return "NDTV";
+  return "oops";
+};
 
 const SaveButton = ({ article }) => {
   const [saving, setSaving] = useState(false);
@@ -12,7 +19,7 @@ const SaveButton = ({ article }) => {
       await api.post("/savednews/api/save/", {
         title: article.title,
         link: article.link,
-        source: article.source || "Times of India",
+        source: article.source || getSourceFromLink(article.link),
       });
       setSaved(true);
     } catch (error) {

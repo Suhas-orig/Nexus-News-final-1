@@ -9,7 +9,7 @@ import "../styles/Index.css";
 function SavedArticles() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();  // <--- add this
+  const navigate = useNavigate();
 
   const breakpointColumnsObj = {
     default: 4,
@@ -24,6 +24,7 @@ function SavedArticles() {
     fetchSavedArticles();
   }, []);
 
+  // Fetch saved articles from backend API
   const fetchSavedArticles = async () => {
     setLoading(true);
     try {
@@ -37,6 +38,7 @@ function SavedArticles() {
     }
   };
 
+  // Delete article by id, refresh list after success
   const deleteArticle = async (id) => {
     if (!window.confirm("Are you sure you want to delete this article? ")) return;
     try {
@@ -53,9 +55,10 @@ function SavedArticles() {
     }
   };
 
-  // NEW: Navigate to discussion page, passing article as state
-  const handleDiscuss = (article) => {
-    navigate("/discussion", { state: { article } });
+  // NEW: On clicking "Post This" button, navigate to PostArticle page
+  // Pass the article title and link as React Router state
+  const handlePost = (article) => {
+    navigate("/threads/post", { state: { title: article.title, link: article.link } });
   };
 
   if (loading) return <VintageLoader />;
@@ -78,7 +81,7 @@ function SavedArticles() {
                 <SavedArticleCard
                   article={article}
                   onDelete={deleteArticle}
-                  onDiscuss={handleDiscuss}  
+                  onPost={handlePost}  // <-- Updated prop here
                 />
               </div>
             ))}

@@ -2,14 +2,17 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import SavedArticles from "./pages/SavedArticles"; // Note app
+import SavedArticles from "./pages/SavedArticles"; 
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Discussion from "./pages/Discussion"; // 👈 Import this!
+import Discussion from "./pages/Discussion"; 
+import ThoughtsPage from "./pages/ThoughtsPage";
 
 import News from "./pages/News";
 import News2 from "./pages/News2";
-import News3 from "./pages/News3";  // <-- Import your new News3 component
+import News3 from "./pages/News3";  
+import PostArticle from "./pages/PostArticle"; 
+
 import DashboardLayout from "../layouts/DashboardLayout";
 
 function Logout() {
@@ -91,6 +94,30 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/threads/post"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <PostArticle />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/threads/thoughts"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <ThoughtsPage />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              }
+            />
+
+
 
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />

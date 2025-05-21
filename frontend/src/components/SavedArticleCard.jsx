@@ -1,12 +1,12 @@
-import { BookMarked, ExternalLink, Trash2 } from "lucide-react";
+import { BookMarked, ExternalLink, Trash2, Edit3 } from "lucide-react";
 
-export default function SavedArticleCard({ article, onDelete, onDiscuss }) {
+export default function SavedArticleCard({ article, onDelete, onDiscuss, onPost }) {
   const formattedDate = new Date(article.saved_at).toLocaleDateString("en-US");
 
   return (
     <div className="bg-[#fffef9] border border-[#dfd3c3] text-[#2b2b2b] p-6 rounded-2xl shadow-[4px_4px_0px_#b6a48e] hover:shadow-[6px_6px_0px_#a49585] transition-all duration-300 font-['Special_Elite']">
-      <h3 className="text-xl mb-2 leading-snug tracking-wide">
-        <BookMarked className="inline-block mr-2 text-[#9c6b30]" />
+      <h3 className="text-xl mb-2 leading-snug tracking-wide flex items-center">
+        <BookMarked className="mr-2 text-[#9c6b30] w-5 h-5" />
         {article.title}
       </h3>
       <a
@@ -28,12 +28,11 @@ export default function SavedArticleCard({ article, onDelete, onDiscuss }) {
           <Trash2 className="w-4 h-4" /> Delete
         </button>
 
-        {/* NEW BUTTON */}
         <button
-          onClick={() => onDiscuss(article)}
+          onClick={() => onPost(article)}
           className="inline-flex items-center gap-1 text-xs text-white bg-[#6b705c] hover:bg-[#535843] px-4 py-2 rounded-md shadow transition-colors"
         >
-          📝 Note & Discuss
+          <Edit3 className="w-4 h-4" /> Post This
         </button>
       </div>
     </div>
