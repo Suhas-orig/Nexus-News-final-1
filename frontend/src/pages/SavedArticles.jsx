@@ -3,8 +3,8 @@ import Masonry from "react-masonry-css";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import SavedArticleCard from "../components/SavedArticleCard";
-import VintageLoader from "../components/VintageLoader";
 import "../styles/Index.css";
+import SimpleLoader from "../components/SimpleLoader";
 
 function SavedArticles() {
   const [articles, setArticles] = useState([]);
@@ -61,7 +61,7 @@ function SavedArticles() {
     navigate("/threads/post", { state: { title: article.title, link: article.link } });
   };
 
-  if (loading) return <VintageLoader />;
+  if (loading) return <SimpleLoader/>;
 
   return (
     <div className="min-h-screen flex justify-center items-start px-6 relative bg-transparent pt-12">

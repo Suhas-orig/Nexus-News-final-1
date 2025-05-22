@@ -5,10 +5,14 @@ export default function SavedArticleCard({ article, onDelete, onDiscuss, onPost 
 
   return (
     <div className="bg-[#fffef9] border border-[#dfd3c3] text-[#2b2b2b] p-6 rounded-2xl shadow-[4px_4px_0px_#b6a48e] hover:shadow-[6px_6px_0px_#a49585] transition-all duration-300 font-['Special_Elite']">
-      <h3 className="text-xl mb-2 leading-snug tracking-wide flex items-center">
-        <BookMarked className="mr-2 text-[#9c6b30] w-5 h-5" />
+      <h3 className="text-xl mb-2 leading-snug tracking-wide flex items-start">
+        <BookMarked 
+          className="mr-2 text-[#9c6b30]" 
+          style={{ width: 20, height: 20, flexShrink: 0, alignSelf: 'flex-start' }} 
+        />
         {article.title}
       </h3>
+
       <a
         href={article.link}
         target="_blank"

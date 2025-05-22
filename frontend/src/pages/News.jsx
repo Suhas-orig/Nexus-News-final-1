@@ -33,7 +33,7 @@ function News() {
       });
   }, []);
 
-  if (loading) return <VintageLoader />; // 💫 Drop it like it's vintage
+  if (loading) return <VintageLoader />; 
 
   return (
     <div className="min-h-screen bg-[url('/vintage_newspaper_bg.jpg')] bg-cover bg-fixed bg-no-repeat px-4 py-10 font-special">

@@ -14,6 +14,7 @@ import News3 from "./pages/News3";
 import PostArticle from "./pages/PostArticle"; 
 
 import DashboardLayout from "../layouts/DashboardLayout";
+import Footer from "./components/Footer"; // ⬅️ import the footer!
 
 function Logout() {
   localStorage.clear();
@@ -34,97 +35,96 @@ function App() {
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
             backgroundImage: "url('/BG2.jpg')",
-            
           }}
         />
         <div className="absolute inset-0 bg-black/0" />
       </div>
 
       {/* Main content */}
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen flex flex-col justify-between">
         <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <News />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/SavedArticles"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <SavedArticles />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/ndtv-news"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <News2 />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/hindu-news"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <News3 />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
-            
-            {/* 🚀 New Discussion Route */}
-            <Route
-              path="/discussion"
-              element={
-                <ProtectedRoute>
-                  <Discussion />
-                </ProtectedRoute>
-              }
-            />
+          <div className="flex-grow">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <News />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/SavedArticles"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <SavedArticles />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/ndtv-news"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <News2 />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/hindu-news"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <News3 />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              path="/threads/post"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <PostArticle />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/discussion"
+                element={
+                  <ProtectedRoute>
+                    <Discussion />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              path="/threads/thoughts"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout>
-                    <ThoughtsPage />
-                  </DashboardLayout>
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/threads/post"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <PostArticle />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
 
+              <Route
+                path="/threads/thoughts"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout>
+                      <ThoughtsPage />
+                    </DashboardLayout>
+                  </ProtectedRoute>
+                }
+              />
 
+              <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/register" element={<RegisterAndLogout />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/register" element={<RegisterAndLogout />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-
+          <Footer />
         </BrowserRouter>
       </div>
     </div>

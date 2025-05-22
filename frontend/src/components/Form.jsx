@@ -40,14 +40,17 @@ function Form({ route, method }) {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full sm:w-[380px] mt-6 p-6 sm:p-8 rounded-2xl border border-[#a0522d] bg-[#faf8f7] 
-        shadow-[4px_4px_8px_rgba(168,83,63,0.4)] 
-        hover:shadow-[6px_6px_12px_rgba(160,70,55,0.6)] 
-        transition-shadow duration-300 font-['Special_Elite']
-         text-[#2b2b2b] z-10 relative overflow-hidden"
-
+        className="
+          w-full sm:w-[380px] mt-6 p-8 rounded-3xl
+          bg-gradient-to-br from-[#fbf7ef] via-[#f7efe0] to-[#ede4d9]
+          border border-[#a16c42]
+          shadow-[0_8px_20px_rgba(161,108,66,0.35)]
+          hover:shadow-[0_10px_30px_rgba(140,85,40,0.5)]
+          transition-shadow duration-300
+          font-['Special_Elite'] text-[#3c2f21] relative overflow-hidden
+        "
       >
-        <h1 className="text-3xl font-bold mb-6 text-center uppercase tracking-wider">
+        <h1 className="text-3xl font-bold mb-6 text-center uppercase tracking-wider drop-shadow-[0_1px_0.5px_rgba(60,47,33,0.6)]">
           {name}
         </h1>
 
@@ -58,8 +61,13 @@ function Form({ route, method }) {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Your Codename..."
           required
-          className="w-full px-4 py-2 mb-4 bg-[#f5f2e8]/30 text-[#2b2b2b] border border-[#a58b58]/30 
-                     focus:outline-none focus:ring-1 focus:ring-[#a58b58] rounded-sm shadow-sm placeholder-[#5a544d]"
+          className="
+            w-full px-4 py-3 mb-4 bg-[#fdf7e3] text-[#3c2f21] border border-[#b2996e] rounded-md
+            shadow-inner
+            focus:outline-none focus:ring-1 focus:ring-[#b89972]
+            placeholder-[#7a6c5d]
+            transition-colors duration-200
+          "
         />
 
         <label className="block text-sm mb-1">Password</label>
@@ -69,27 +77,31 @@ function Form({ route, method }) {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Your Secret Pass..."
           required
-          className="w-full px-4 py-2 mb-6 bg-[#f5f2e8]/30 text-[#2b2b2b] border border-[#a58b58]/30 
-                     focus:outline-none focus:ring-1 focus:ring-[#a58b58] rounded-sm shadow-sm placeholder-[#5a544d]"
+          className="
+            w-full px-4 py-3 mb-6 bg-[#fdf7e3] text-[#3c2f21] border border-[#b2996e] rounded-md
+            shadow-inner
+            focus:outline-none focus:ring-1 focus:ring-[#b89972]
+            placeholder-[#7a6c5d]
+            transition-colors duration-200
+          "
         />
 
-          <button
-            type="submit"
-            className="group relative inline-block w-full overflow-hidden border border-[#b83a3a] px-8 py-3 focus:ring-2 focus:outline-none"
+        <button
+          type="submit"
+          className="group relative inline-block w-full overflow-hidden border border-[#b83a3a] px-8 py-3 focus:ring-2 focus:outline-none"
+        >
+          <span
+            className="absolute inset-x-0 top-0 h-[2px] bg-[#b83a3a] transition-all duration-300 group-hover:h-full"
+          ></span>
+
+          <span
+            className="relative text-sm font-semibold text-[#b83a3a] transition-colors duration-300 group-hover:text-white font-['Special_Elite'] tracking-wider uppercase"
           >
-            <span
-              className="absolute inset-x-0 top-0 h-[2px] bg-[#b83a3a] transition-all duration-300 group-hover:h-full"
-            ></span>
-
-            <span
-              className="relative text-sm font-semibold text-[#b83a3a] transition-colors duration-300 group-hover:text-white font-['Special_Elite'] tracking-wider uppercase"
-            >
-              {name}
-            </span>
-          </button>
-
-
+            {name}
+          </span>
+        </button>
       </form>
+
     </div>
   );
 }
